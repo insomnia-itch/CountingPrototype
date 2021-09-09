@@ -30,16 +30,20 @@ public class BallController : MonoBehaviour
         {
             // TODO should only load ball *after* ball is scored
             // need to keep track of time it takes to fire before reloading
-            LoadBall();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                LoadBall();
+            }
         }
     }
 
     // TODO addForce to ball, update isLoaded
     void Fire()
     {
-        isLoaded = false;
         loadedBall.GetComponent<Rigidbody>().AddForce(Vector3.left * force);
+        loadedBall.GetComponent<Rigidbody>().AddForce(Vector3.forward* horizontalInput);
         loadedBall.transform.SetParent(null, true);
+        isLoaded = false;
         loadedBall = null;
     }
 
